@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Security Logging Dashboard</title>
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Security Logging Dashboard</h1>
+            <p>Winston + Structured Logs + Real-time Monitoring</p>
+        </div>
+
+        <div class="grid">
+            <div class="card">
+                <h2>Normal Requests</h2>
+                <button class="btn btn-success" onclick="testSuccess()">Test Success</button>
+                <button class="btn btn-info" onclick="testNotFound()">Test 404</button>
+                <button class="btn btn-warning" onclick="testError()">Test 500 Error</button>
+                <button class="btn btn-secondary" onclick="testSlow()">Test Slow (3s)</button>
+                <div class="response-area" id="response-normal"></div>
+            </div>
+
+            <div class="card">
+                <h2>Security Attacks</h2>
+                <button class="btn btn-danger" onclick="testSQLInjection()">SQL Injection</button>
+                <button class="btn btn-danger" onclick="testXSS()">XSS Attack</button>
+                <button class="btn btn-danger" onclick="testBruteForce()">Brute Force</button>
+                <button class="btn btn-warning" onclick="testUnauthorized()">Unauthorized 403</button>
+                <div class="response-area" id="response-security"></div>
+            </div>
+
+            <div class="card">
+                <h2>Login Tests</h2>
+                <div class="input-group">
+                    <label>Email</label>
+                    <input type="email" id="login-email" value="victim@example.com">
+                </div>
+                <button class="btn btn-danger" onclick="testFailedLogin()">Failed Login</button>
+                <button class="btn btn-success" onclick="testSuccessLogin()">Success Login</button>
+                <div class="response-area" id="response-login"></div>
+            </div>
+
+            <div class="card">
+                <h2>View Logs</h2>
+                <select id="log-type">
+                    <option value="app">App Logs</option>
+                    <option value="error">Error Logs</option>
+                    <option value="security">Security Logs</option>
+                </select>
+                <select id="log-level">
+                    <option value="">All Levels</option>
+                    <option value="info">Info</option>
+                    <option value="warn">Warn</option>
+                    <option value="error">Error</option>
+                </select>
+                <input type="number" id="log-limit" value="20" min="1" max="200">
+                <button class="btn btn-primary" onclick="viewLogs()">Load Logs</button>
+                <button class="btn btn-secondary" onclick="clearLogs()">Clear All</button>
+                <div class="response-area" id="response-logs"></div>
+            </div>
+
+            <div class="card full-width">
+                <h2>Thống kê</h2>
+                <div class="stats-grid">
+                    <div class="stat-box"><h3 id="stat-total">0</h3><p>Total</p></div>
+                    <div class="stat-box"><h3 id="stat-errors">0</h3><p>Errors</p></div>
+                    <div class="stat-box"><h3 id="stat-warnings">0</h3><p>Warnings</p></div>
+                    <div class="stat-box"><h3 id="stat-security">0</h3><p>Security</p></div>
+                </div>
+            </div>
+
+            <div class="card full-width">
+                <h2>Recent Security Events</h2>
+                <div id="recent-logs"><p style="text-align:center;color:#999">No events yet</p></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="dashboard.js"></script>
+</body>
+</html>
